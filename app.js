@@ -14,18 +14,29 @@ cloudinary.config({
     api_secret: 'ckuXwEbEDaVBffGEgkAoIErde4c',
 });
 
-app.get(("/", request, response) => {
+app.get("/", (request, response) => {
     response.json({ message: 'Hey ,dude!  This is your server response!  Good on you!' })
 });
 
-api.post("/upload-image", (request, response) => {
+app.post("/image-upload", (request, response) => {
+    //COLLECT IMAGE FROM USER
     const data = {
      image: request.body.image,
     }
-    cloudinary.uploader.upload(data.image);
+    //UPLOAD IMAGE HERE
+    cloudinary.uploader.upload(data.image)
+        .then((result) => {
+            response.status(200).send({
+                message: "success",
+                result,
+            });
+        }).catch((error) => {
+            response.status(500).send({
+                message: "failure",
+                error,
+            });
+        });
 });
-
-
 
 
 
