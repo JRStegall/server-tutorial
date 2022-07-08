@@ -1,12 +1,12 @@
 
-import express from 'express';
+const express = require('express');
 const app = express();
-import { v2 as cloudinary } from 'cloudinary';
-import { json, urlencoded } from 'body-parser';
+const cloudinary = require('cloudinary').v2
+const bodyParser = require('body-parser');
 
 //BODY PARSER CONFIG
-app.use(json());
-app.use(urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //CLOUDINARY CONFIG
 cloudinary.config({
@@ -42,4 +42,4 @@ app.post("/upload-image", (request, response) => {
 
 
 
-export default app;
+module.exports = app;
