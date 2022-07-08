@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const cloudinary = require('cloudinary').v2
 const bodyParser = require('body-parser');
+require('dotenv').config();
 
 //BODY PARSER CONFIG
 app.use(bodyParser.json());
@@ -10,13 +11,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //CLOUDINARY CONFIG
 cloudinary.config({
-    cloud_name: 'dlrpyxua6',
-    api_key: '445588491557849',
-    api_secret: 'ckuXwEbEDaVBffGEgkAoIErde4c',
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET
 });
 
 app.get("/", (request, response) => {
-    response.json({ message: 'Hey ,dude!  This is your server response!  Good on you!' })
+    response.json({ message: 'Hey ,dude!  This is your server response!  Good on you!' });
+    next();
 });
 
 //IMAGE UPLOAD API
