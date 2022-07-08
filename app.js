@@ -1,11 +1,12 @@
-const express = require('express');
+
+import express from 'express';
 const app = express();
-const cloudinary = require('cloudinary').v2
-const bodyParser = require('body-parser');
+import { v2 as cloudinary } from 'cloudinary';
+import { json, urlencoded } from 'body-parser';
 
 //BODY PARSER CONFIG
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(json());
+app.use(urlencoded({ extended: true }));
 
 //CLOUDINARY CONFIG
 cloudinary.config({
@@ -18,7 +19,8 @@ app.get("/", (request, response) => {
     response.json({ message: 'Hey ,dude!  This is your server response!  Good on you!' })
 });
 
-app.post("/image-upload", (request, response) => {
+//IMAGE UPLOAD API
+app.post("/upload-image", (request, response) => {
     //COLLECT IMAGE FROM USER
     const data = {
      image: request.body.image,
@@ -40,4 +42,4 @@ app.post("/image-upload", (request, response) => {
 
 
 
-module.exports = app;
+export default app;
