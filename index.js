@@ -1,5 +1,7 @@
 const http = require('http');
-const server = http.createServer((Request, Response) => {
-    Response.end('Hey! This is your server response!');
-});
+const app = require('./app');
+
+app.set('port', 3000);
+const server = http.createServer(app);
+
 server.listen(3000);
